@@ -29,21 +29,24 @@ stopButton.addEventListener("click", function () {
 	}
 });
 
+//location of each fish in an array 
+var fish = [{x: 250, y:150}, {x: 40, y: 40}, {x: 10, y: 400}];
+
 var timeoutId;
 var running = false;
-var xPosition = 250;
-var yPosition = 150;
 
 function drawMoving(){
 	context.clearRect(0, 0, canvas.width, canvas.height);
-	context.beginPath();
-	context.arc(xPosition, yPosition, 20, 0, 2*Math.PI);
-	context.stroke();
-	context.fillStyle = "pink";
-	context.fill();
+	for (var num = 0; num < fish.length; num++){
+		context.beginPath();
+		context.arc(fish[num].x, fish[num].y, 20, 0, 2 * Math.PI);
+		context.stroke();
+		context.fillStyle = "pink";
+		context.fill();
 
-	xPosition += 4;
-	yPosition += 0;
+		fish[num].x += 4;
+		fish[num].y += 0;
+	}
 	timeoutId = setTimeout(drawMoving, 40);
 }
 
