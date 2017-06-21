@@ -1,0 +1,57 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<meta charset="utf-8">
+<style>
+	#fishTank{
+		border: 1px solid blue;
+		background-color:blue;
+	}
+</style>
+</head>
+<body>
+<canvas id="fishTank" width="600" height="600"></canvas>
+<input type="button" value="Stop" id="stopButton">
+<script>
+var canvas = document.getElementById("fishTank");
+var context = canvas.getContext("2d");
+var stopButton = document.getElementById("stopButton");
+
+stopButton.addEventListener("click", function () {
+	if (running) {
+		clearTimeout(timeoutId);
+		running = false;
+		stopButton.value = "Resume";
+	} else {
+		drawMoving();
+		running = true;
+		stopButton.value = "Stop";
+	}
+});
+
+var timeoutId;
+var running = false;
+var xPosition = 250;
+var yPosition = 150;
+
+function drawMoving(){
+	context.clearRect(0, 0, canvas.width, canvas.height);
+	context.beginPath();
+	context.arc(xPosition, yPosition, 20, 0, 2*Math.PI);
+	context.stroke();
+	context.fillStyle = "pink";
+	context.fill();
+
+	xPosition += 4;
+	yPosition += 0;
+	timeoutId = setTimeout(drawMoving, 40);
+}
+
+canvas.addEventListener("click", drawMoving);
+
+drawMoving();
+running = true;
+
+</script>
+</body>
+</html>
